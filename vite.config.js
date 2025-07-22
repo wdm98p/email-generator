@@ -1,13 +1,15 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
+import path from 'path'
 
 export default defineConfig({
-  plugins: [react()],
+  root: '.', // explicitly set root
   build: {
     rollupOptions: {
-      input: resolve(__dirname, 'index.html'),
+      input: path.resolve(__dirname, 'index.html'),
     },
-    outDir: 'dist',
+    outDir: 'dist', // Netlify expects dist by default
+    emptyOutDir: true,
   },
+  plugins: [react()],
 })
